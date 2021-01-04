@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandControllers : MonoBehaviour {
+public class HandControllers : MonoBehaviour
+{
 
-	public SteamVR_TrackedObject trackedObj;
-    public SteamVR_Controller.Device device;
+    [SerializeField] private OVRInput.Controller rightController;
+    
+	/*public SteamVR_TrackedObject trackedObj;
+    public SteamVR_Controller.Device device;*/
 
     private Rigidbody rb;
     public bool isGrabbed;
@@ -22,18 +25,18 @@ public class HandControllers : MonoBehaviour {
 	
 	// Update is called once per framer
 	void Update () {
-		device = SteamVR_Controller.Input ((int)trackedObj.index);
+		/*device = SteamVR_Controller.Input ((int)trackedObj.index);
 
         if (device.GetPress(SteamVR_Controller.ButtonMask.Touchpad))
         {
-        }
+        }*/
 	}
 
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "BrokenPiece" && isGrabbed == false)
         {
-            if (device.GetPress(SteamVR_Controller.ButtonMask.Trigger))
+            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
             {
                 GrabObject(other);
             }
@@ -41,7 +44,7 @@ public class HandControllers : MonoBehaviour {
 
         if (other.gameObject.tag == "Phone" && isGrabbed == false)
         {
-            if (device.GetPress(SteamVR_Controller.ButtonMask.Trigger))
+            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
             {
                 GrabPhone(other);
 
@@ -50,7 +53,7 @@ public class HandControllers : MonoBehaviour {
 
         if (other.gameObject.tag == "BrokenPiece" && isGrabbed == true)
         {
-            if (device.GetPressUp(SteamVR_Controller.ButtonMask.Trigger))
+            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
             {
                 ReleaseObject(other);
             }
@@ -58,7 +61,7 @@ public class HandControllers : MonoBehaviour {
 
         if (other.gameObject.tag == "Phone" && isGrabbed == true)
         {
-            if (device.GetPressUp(SteamVR_Controller.ButtonMask.Trigger))
+            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
             {
                 ReleasePhone(other);
             }
@@ -94,8 +97,7 @@ public class HandControllers : MonoBehaviour {
 
             coliRb.isKinematic = false;
             coliRb.useGravity = true;
-            coliRb.velocity = device.velocity;
-            coliRb.angularVelocity = device.angularVelocity;
+    
         }
 
         //Debug.Log(rb.velocity);
@@ -134,10 +136,7 @@ public class HandControllers : MonoBehaviour {
         Rigidbody coliRb = coli.gameObject.GetComponent<Rigidbody>();
         coliRb.isKinematic = false;
         coliRb.useGravity = true;
-        coliRb.velocity = device.velocity;
-        //Debug.Log(rb.velocity);
-        coliRb.angularVelocity = device.angularVelocity;
-
+        
         coli.GetComponent<BoxCollider>().isTrigger = false;
 
         handModels.SetActive(true);

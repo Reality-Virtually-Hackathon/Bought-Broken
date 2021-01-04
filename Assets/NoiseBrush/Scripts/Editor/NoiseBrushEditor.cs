@@ -421,7 +421,7 @@ public class ErosionBrushEditor : Layout
 		TerrainData data = script.terrain.terrainData;
 
 		//reading keyboard
-		if (Event.current.type == EventType.keyDown)
+		if (Event.current.type == EventType.KeyDown)
 		{
 			//selecting presets with keycode
 			if (script.guiSelectPresetsUsingNumkeys) 
@@ -539,7 +539,7 @@ public class ErosionBrushEditor : Layout
 		}
 
 		//refreshin terrain for Unity5
-		if (script.unity5positioning && (Event.current.type == EventType.mouseDown || unity5terrainRefreshCounter==10))
+		if (script.unity5positioning && (Event.current.type == EventType.MouseDown || unity5terrainRefreshCounter==10))
 		{
 			//data.size += Vector3.up*0.01f;
 			//data.size -= Vector3.up*0.01f;

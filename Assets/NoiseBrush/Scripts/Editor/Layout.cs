@@ -534,7 +534,7 @@ namespace NoiseBrushPlugin
 				float lineHeight = this.position.height / items.Length;
 			
 				//background
-				if (Event.current.type == EventType.repaint) GUI.skin.box.Draw(fullRect, false, true, true, false);
+				if (Event.current.type == EventType.Repaint) GUI.skin.box.Draw(fullRect, false, true, true, false);
 				GUI.DrawTexture(new Rect(1,1,fullRect.width-2,fullRect.height-2), background, ScaleMode.StretchToFill);
 
 				//list
@@ -615,7 +615,7 @@ namespace NoiseBrushPlugin
 				
 
 				//if (GUI.Button(new Rect(10,10, 40, 20), "Close")) this.Close();
-				if (Event.current.rawType == EventType.mouseUp) this.Close();
+				if (Event.current.rawType == EventType.MouseUp) this.Close();
 				
 				
 				//if (EditorWindow.focusedWindow.GetType() != typeof(Menu)) this.Focus();
